@@ -1,19 +1,19 @@
 interface DatosProducto {
-    nombre: string;
-    precio: number;
-    stock: number;
-    estado: boolean;
+    nombre: string,
+    precio: number,
+    stock: number,
+    estado: boolean
 }
 
 interface DatosCategoria {
-    nombre: string;
-    productos: DatosProducto[];
+    nombre: string,
+    productos: DatosProducto[]
 }
 
 interface DatosTienda {
-    id: number;
-    nombre: string;
-    categorias: DatosCategoria[];
+    id: number,
+    nombre: string,
+    categorias: DatosCategoria[]
 }
 
 const tiendas: DatosTienda[] = [
@@ -80,7 +80,9 @@ function mostrarTienda(): void {
         });
     });
 }
-mostrarTienda();
+
+//mostrarTienda();
+
 
 import * as readline from 'readline';
 
@@ -90,12 +92,12 @@ const rl = readline.createInterface({
 });
 
 function buscarProducto(producto: string): void {
-    let encontrado = false;
+    let encontrado: boolean = false;
 
     tiendas.forEach(function (tienda) {
         tienda.categorias.forEach(function (categoria) {
             categoria.productos.forEach(function (prod) {
-                if (prod.nombre.toLowerCase() === producto.toLowerCase()) {
+                if (prod.nombre.toLowerCase() === producto.toLowerCase() && prod.estado) {
                     encontrado = true;
                     console.log("\n\nProducto: " + prod.nombre);
                     console.log("  Precio: " + prod.precio.toFixed(2) + " Pesos");
@@ -109,7 +111,7 @@ function buscarProducto(producto: string): void {
     });
 
     if (!encontrado) {
-        console.log("Producto no encontrado.");
+        console.log("Producto no encontrado o inactivo.");
     }
 }
 
