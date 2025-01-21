@@ -45,7 +45,6 @@ var tiendas = [
     },
 ];
 
-// Recorrer y mostrar la información
 function mostrarTienda() {
     tiendas.forEach(function (tienda) {
         console.log("\n\n\nTienda: ", tienda.nombre, "(ID: ", tienda.id, ")");
@@ -62,23 +61,20 @@ function mostrarTienda() {
 }
 mostrarTienda();
 
-// Menú de búsqueda de productos
 var readline = require('readline');
 
-// Crear una interfaz de lectura de datos desde la consola
 var rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-// Función para buscar un producto
 function buscarProducto(producto) {
-    let encontrado = false; // Variable para saber si encontramos el producto
+    let encontrado = false; 
 
     tiendas.forEach(function (tienda) {
         tienda.categorias.forEach(function (categoria) {
             categoria.productos.forEach(function (prod) {
-                if (prod.nombre.toLowerCase() === producto.toLowerCase()) { // Compara ignorando mayúsculas/minúsculas
+                if (prod.nombre.toLowerCase() === producto.toLowerCase()) { 
                     encontrado = true;
                     console.log("\n\nProducto: " + prod.nombre);
                     console.log("  Precio: " + prod.precio.toFixed(2) + " Pesos");
@@ -96,23 +92,21 @@ function buscarProducto(producto) {
     }
 }
 
-// Función para mostrar el menú y gestionar la entrada del usuario
 function mostrarMenu() {
     rl.question("\nElija una opción:\n1. Buscar producto\n2. Salir\n", function (opcion) {
         if (opcion === "1") {
             rl.question("Ingrese el nombre del producto a buscar: ", function (producto) {
                 buscarProducto(producto);
-                mostrarMenu(); // Mostrar el menú nuevamente
+                mostrarMenu(); 
             });
         } else if (opcion === "2") {
             console.log("Saliendo del programa...");
-            rl.close(); // Cierra la interfaz de lectura
+            rl.close(); 
         } else {
             console.log("Opción no válida, intente de nuevo.");
-            mostrarMenu(); // Mostrar el menú nuevamente
+            mostrarMenu(); 
         }
     });
 }
 
-// Iniciar el programa mostrando el menú
 mostrarMenu();
